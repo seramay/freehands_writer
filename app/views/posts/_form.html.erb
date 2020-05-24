@@ -12,21 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label :title, class:'form-label' %>
+    <%= form.text_field :title, placeholder: "タイトル" %>
   </div>
 
   <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.label :content, class:'form-label' %>
+    <%= form.text_area :content, placeholder: "本文を入力" %>
   </div>
 
   <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %>
+    <%= form.label :image, "画像選択", class: 'form-image' %>
+    <%= form.file_field :image, class: 'hidden' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "決定" %>
   </div>
 <% end %>
