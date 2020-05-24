@@ -1,19 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
+<p class="post-title">
+  <strong >タイトル:</strong>
   <%= @post.title %>
 </p>
 
-<p>
-  <strong>Content:</strong>
+<p class="post-content">
+  <strong>本文:</strong>
   <%= @post.content %>
 </p>
 
-<p>
-  <strong>Image:</strong>
+<p class="post-image">
   <%= image_tag "#{@post.image}" %>
 </p>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', root_path %>
+<div class="show-links">
+  <%= link_to '編集', edit_post_path(@post) %> |
+  <%= link_to '投稿一覧へ', root_path %>
+</div>

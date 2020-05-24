@@ -1,0 +1,31 @@
+@mixin tac(){
+  text-align: center;
+}
+
+@mixin tableBody(){
+  background-color: $tableBgc;
+  color: $mainChar;
+  border-radius: 15px;
+}
+
+@mixin inputBorder($bd, $rd, $pad){
+  border: $bd solid #3F3F30;
+  border-radius: $rd;
+  padding: $pad;
+}
+
+@mixin lineGradient($a, $b){
+  background: linear-gradient(to bottom, $a, $b);
+}
+
+@mixin mirrorGradient($a, $b, $c){
+  background: linear-gradient(to bottom, $a, $b 55%, $c);
+}
+
+@keyframes gradationTest{
+  /*この順番で変化していく。横% : 縦％で移動。適用している input[type="submit"] には背景サイズが600%x600%にしてあるので、
+    縦%を中央に固定して横だけ動かす事で グラデーションが動いているように見せている。10sを1sにして短くしてみればイメージつきやすい */
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}

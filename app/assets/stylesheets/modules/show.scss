@@ -1,0 +1,20 @@
+.post-title{
+  @include tac();
+  padding: 20px 0;
+  font-size: 32px;
+}
+
+.post-content{
+  @include tac();
+  padding: 20px 0;
+  color: $mainChar;
+}
+
+.post-image{
+  @include tac();
+}
+
+.show-links{
+  @include tac();
+  padding: 20px 0;
+}

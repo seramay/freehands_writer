@@ -1,0 +1,37 @@
+.index-title{
+  margin: 15px;
+}
+
+.new-form{
+  margin-left: 30px;
+  font-size: 20px;
+}
+
+.posts-table{
+  max-width: 100%;
+  min-width: 600px;
+}
+
+.table-header{
+  padding-right: 10px;
+}
+
+.table-contents{
+  @include tableBody();
+  padding: 10px;
+  &--title{
+    @include tac();
+    min-width: 150px;
+    // BEM記法が効かない？？
+  @include tableBody();
+  }
+  img{
+    border-radius: 15px;
+  }
+}
+
+.column-menu{
+  display: block;
+  margin-top: 5px;
+  min-width: 80px;
+}
