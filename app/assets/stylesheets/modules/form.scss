@@ -14,7 +14,6 @@
   }
   textarea{
     @include inputBorder(1px, 5px, 5px);
-    @include lineGradient(#f9f9f9, #f0f0f0);
     width: 600px;
     height: 250px;
   }
@@ -25,30 +24,14 @@
     cursor: pointer;
   }
   .form-image:hover{
-    /*相対位置指定*/
-    position: relative;
-    /*グラデーション①*/
-    background: linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;
-    /*はみ出た部分を隠す*/
-    overflow: hidden;
-  }
-  .form-image:hover:before{
-    content: '';
-    /*絶対配置*/
-    position: absolute;
-    /*ずらす*/
-    top: 23px;
-    left: -15px;
-    width: 60px;
-    height: 60px;
-    /*グラデーション②*/
-    background: radial-gradient(#ffdb2c 10%, rgba(255, 105, 34, 0.65) 55%, rgba(255, 88, 96, 0) 70%);
-  }
-  input[type="submit"]{
-    @include inputBorder(1px, 5px, 8px);
     background: linear-gradient(45deg, #6cb8ff, #fff66c, #ffa36c);
     background-size: 600% 600%;
     animation: gradationTest 10s ease infinite;
+    
+  }
+  input[type="submit"]{
+    @include inputBorder(1px, 5px, 8px);
+    @include lineGradient(#f9f9f9, #f0f0f0)
   }
 }
 
