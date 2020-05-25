@@ -25,7 +25,7 @@
 @keyframes gradationTest{
   /*この順番で変化していく。横% : 縦％で移動。適用している input[type="submit"] には背景サイズが600%x600%にしてあるので、
     縦%を中央に固定して横だけ動かす事で グラデーションが動いているように見せている。10sを1sにして短くしてみればイメージつきやすい */
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+  0%{background-position:100% 30%}
+  50%{background-position:30% 100%}
+  100%{background-position:100% 30%}
 }
