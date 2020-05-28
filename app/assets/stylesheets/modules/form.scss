@@ -14,6 +14,7 @@
   }
   textarea{
     @include inputBorder(1px, 5px, 5px);
+    @include lineGradient(#f9f9f9, #f0f0f0);
     width: 600px;
     height: 250px;
   }
