@@ -14,6 +14,7 @@
   }
   textarea{
     @include inputBorder(1px, 5px, 5px);
+    @include lineGradient(#f9f9f9, #f0f0f0);
     width: 600px;
     height: 250px;
   }
@@ -37,6 +38,63 @@
 
 .hidden{
   display: none;
+}
+
+// canvas_zone...canvasの大きさはメディアクエリを利用し、PCは800x600、iPad以下のwidthで開いた場合にはウィンドウに合わせて収縮させるように設定する。
+.canvas-field{
+  display: flex;
+  #candiv{
+    margin-right: 10px;
+    border: 4px double #000;
+    background-color: #fff;
+    }
+  .btn-box{
+    background-color: gray;
+    display: flex;
+    ul{
+      li{
+        list-style: none;
+      }
+      .cvsbtn{
+        border: 1px solid #000;
+        border-radius: 5px;
+        width: 60px;
+        height: 40px;
+        margin: 10px;
+        cursor: pointer;
+        box-shadow: 0 0 10px white;
+        text-align: center;
+        line-height: 40px;
+        // overflow: scroll; -xなしでも挙動変わらんけど...
+        overflow-x: scroll;
+        // 文章が長くても勝手に改行しない
+        white-space: nowrap;
+      }
+      .btn-black{
+        background-color: black;
+        color: white;
+      }
+      .btn-red{
+        background-color: red;
+        color: yellow;
+      }
+      .btn-green{
+        background-color: green;
+        color: yellow;
+      }
+      .btn-blue{
+        background-color: blue;
+        color: yellow;
+      }
+      .btn-white{
+        background-color: white;
+        color: black;
+      }
+      .btn-sc_o_marker{
+        background-color: rgba(255, 0, 0, 0.5);
+      }
+    }
+  }
 }
 
 //new.html.erb, edit.html.erb
