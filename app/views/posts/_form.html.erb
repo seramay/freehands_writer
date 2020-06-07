@@ -1,4 +1,4 @@
-<%= form_with(model: post, local: true) do |form| %>
+<%= form_with(model: post, local: true, id: 'new_post') do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -22,45 +22,41 @@
   </div>
 
   <div class="field">
-    <%= form.label :image, "画像選択", class: 'form-image' %>
-    <%= form.file_field :image, class: 'hidden' %>
+    <%= form.hidden_field :image, class: 'hidden' , value: ''%>
+    <h3>freehand memo</h3>
+    <div class="canvas-field">
+      <div id="candiv">
+        <canvas id="canvas" width="800px" height="600px"></canvas>
+      </div>
+
+      <div class="btn-box">
+        <ul>
+          <li class="cvsbtn btn-black">黒</li>
+          <li class="cvsbtn btn-red">赤</li>
+          <li class="cvsbtn btn-green">緑</li>
+          <li class="cvsbtn btn-blue">青</li>
+          <li class="cvsbtn btn-white">白</li>
+        </ul>
+        <ul>
+          <li class="cvsbtn btn-thin">細</li>
+          <li class="cvsbtn btn-normal">普</li>
+          <li class="cvsbtn btn-bold">太</li>
+          <li class="cvsbtn btn-half">半透明</li>
+          <li class="cvsbtn btn-solid">実色</li>
+          <li class="cvsbtn btn-sc_o_marker">橙マーカー</li>
+          <li class="cvsbtn"></li>
+          <li class="cvsbtn"></li>
+          <li class="cvsbtn"></li>
+          <li class="cvsbtn input_disp">hidden</li>
+          <li id="submit-btn" class="cvsbtn">
+            <%= link_to "保存", "#", id: "canvas-submit" %>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit "決定" %>
+    <%= form.submit "決定", id: 'post_submit' %>
   </div>
 <% end %>
-
-
-
-<h3>freehand memo</h3>
-<div class="canvas-field">
-  <div id="candiv">
-    <canvas id="canvas" width="800px" height="600px"></canvas>
-  </div>
-  
-  <div class="btn-box">
-    <ul>
-      <li class="cvsbtn btn-black">黒</li>
-      <li class="cvsbtn btn-red">赤</li>
-      <li class="cvsbtn btn-green">緑</li>
-      <li class="cvsbtn btn-blue">青</li>
-      <li class="cvsbtn btn-white">白</li>
-    </ul>
-    <ul>
-      <li class="cvsbtn btn-thin">細</li>
-      <li class="cvsbtn btn-normal">普</li>
-      <li class="cvsbtn btn-bold">太</li>
-      <li class="cvsbtn btn-half">半透明</li>
-      <li class="cvsbtn btn-solid">実色</li>
-      <li class="cvsbtn btn-sc_o_marker">橙マーカー</li>
-      <li class="cvsbtn"></li>
-      <li class="cvsbtn"></li>
-      <li class="cvsbtn"></li>
-      <li class="cvsbtn"></li>
-      <li id="submit-btn" class="cvsbtn">
-        <%= link_to "保存", "#", id: "canvas-submit" %>
-      </li>
-    </ul>
-  </div>
-</div>

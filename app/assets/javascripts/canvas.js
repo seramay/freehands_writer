@@ -12,9 +12,54 @@ window.addEventListener('load', function(){
   // 下記の2つで連続描画をした点の部分を補完させている。
   conText.lineJoin="round";
   conText.lineCap="round";
+  // 画像オブジェクトを作成、srcに Rails gem 'gon'で取得した Base64データを代入
+  var img = new Image();
+  img.src = gon.post_image;
+  // 上記画像オブジェクトをcanvasに設定
+  img.onload = function(){
+    conText.drawImage(img, 0, 0, 800, 600);
+  }
   
-  /// ドラッグ状態を判断する変数を宣言。イベント発火OSS参考記事   https://keita-blog.com/programming/jquery-drag ///
+  // ドラッグ状態を判断する変数を宣言。イベント発火OSS参考記事   https://keita-blog.com/programming/jquery-drag ///
   var is_drag = false;
+
+  // 画像保存形式の処理、base64形式→blob形式へ変換、保存ボタンによる画像ダウンロード、投稿と保存は別でOK
+// https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas#Saving_images
+// https://developer.mozilla.org/ja/docs/Web/API/Blob#使用例
+// https://developer.mozilla.org/ja/docs/Web/API/URL/createObjectURL#Syntax
+  function saveCanvas(){
+    let imageType = "image/png";
+    var base64 = cvs.toDataURL(imageType); // canvasタグのURLをbase64形式で取得
+    var blob = base64toBlob(base64); // 下記関数にてbase64をblobデータに変換
+    var url = (window.URL || window.webkitURL);
+    var dataUrl = url.createObjectURL(blob); // ダウンロード用のURL作成
+    let fileName = "sample.png";
+    var a = document.getElementById('canvas-submit');
+    a.href = dataUrl; // ダウンロード用のURLセット
+    a.download = fileName; // ファイル名セット
+  }
+
+  function base64toBlob(base64){
+    // カンマで分割してデータを配列で分けてtmpに代入、tmp[0]:データ形式(data:image/png;base64,)、tmp[1]:base64データ(iVBO~)
+    var tmp = base64.split(',');
+    // base64のデータをatobでデコード
+    var data = atob(tmp[1]);
+    // tmp[0]の文字列（data:image/png;base64）からコンテンツタイプ（image/png）部分を取得し代入(=> image/png;base64 => image/png)
+    var mime = tmp[0].split(':')[1].split(';')[0];
+    // 1文字ごとにUTF-16コードを表す 0から65535 の整数を取得
+    // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
+    // https://developer.mozilla.org/ja/docs/Web/JavaScript/Typed_arrays
+    var buf = new Uint8Array(data.length);
+    for (var i = 0; i < data.length; i++) {
+      buf[i] = data.charCodeAt(i);
+    }
+    // blobデータを作成  https://developer.mozilla.org/ja/docs/Web/API/Blob/Blob
+    var blob = new Blob([buf.buffer], { type: mime });
+    return blob;
+  }
+  $('#canvas-submit').on('click', function(){
+    saveCanvas();
+  });
 
   $('#canvas').on('mousedown', function(st) {
     // ドラッグを開始したら初期位置を座標で取得、ドラッグ状態を真とした真偽値を取得し代入。
@@ -55,51 +100,14 @@ window.addEventListener('load', function(){
 // TODO クリアボタン実装
 
 // TODO 描画した画像をDBに保存
-
-// TODO 保存した画像をDBから読み込み、canvasに反映
-
-
-
-// TEST 画像保存形式の処理、base64形式→blob形式へ変換、保存ボタンによる画像ダウンロード
-  $('#canvas-submit').on('click', function(){
-    saveCanvas();
-
-    function saveCanvas(){
-      var cvs = $("#canvas")[0];
-
-      let imageType = "image/png";
-      let fileName = "sample.png";
-      
-      var base64 = cvs.toDataURL(imageType); // canvasタグのURLをbase64形式で取得
-      var blob = base64toBlob(base64); // 下記関数にてbase64をblobデータに変換
-      // return blob; // この値を利用してajaxで送信してPOST出来るかテストしてた(be_output2 過去ログ)
-      // saveBlob(blob, fileName); // blobデータをa要素を使ってダウンロード
-      var url = (window.URL || window.webkitURL);
-      var dataUrl = url.createObjectURL(blob); // ダウンロード用のURL作成
-      var a = document.getElementById('canvas-submit');
-      a.href = dataUrl; // ダウンロード用のURLセット
-      a.download = fileName; // ファイル名セット
-    }
-
-    function base64toBlob(base64){
-      // カンマで分割してデータを配列で分けてtmpに代入、tmp[0]:データ形式(data:image/png;base64,)、tmp[1]:base64データ(iVBO~)
-      var tmp = base64.split(',');
-      // base64のデータをatobでデコード
-      var data = atob(tmp[1]);
-      // tmp[0]の文字列（data:image/png;base64）からコンテンツタイプ（image/png）部分を取得し代入(=> image/png;base64 => image/png)
-      var mime = tmp[0].split(':')[1].split(';')[0];
-      // 1文字ごとにUTF-16コードを表す 0から65535 の整数を取得
-      // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
-      // https://developer.mozilla.org/ja/docs/Web/JavaScript/Typed_arrays
-      var buf = new Uint8Array(data.length);
-      for (var i = 0; i < data.length; i++) {
-        buf[i] = data.charCodeAt(i);
-      }
-      // blobデータを作成  https://developer.mozilla.org/ja/docs/Web/API/Blob/Blob
-      var blob = new Blob([buf], { type: mime });
-      return blob;
-    }
+  $("#post_submit").on("click", function(e) {
+    e.preventDefault();
+    var base64 = cvs.toDataURL();
+    $('#post_image').val(base64);
+    $('#new_post').submit();
   });
+
+
 
 // TEST 自由選択式にして各クリックイベントは統合する。
     $('.btn-black').on('click', function(){

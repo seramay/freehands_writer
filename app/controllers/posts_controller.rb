@@ -19,6 +19,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    # Javascript上でcanvasに@post.imageを反映させるため、gem 'gon'を宣言
+    gon.post_image = @post.image
   end
 
   # POST /posts

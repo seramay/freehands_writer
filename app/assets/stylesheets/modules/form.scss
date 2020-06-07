@@ -43,6 +43,7 @@
 // canvas_zone...canvasの大きさはメディアクエリを利用し、PCは800x600、iPad以下のwidthで開いた場合にはウィンドウに合わせて収縮させるように設定する。
 .canvas-field{
   display: flex;
+  justify-content: center;
   #candiv{
     margin-right: 10px;
     border: 4px double #000;
