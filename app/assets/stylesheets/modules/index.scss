@@ -22,12 +22,14 @@
   &--title{
     @include tac();
     min-width: 150px;
-    // BEM記法が効かない？？
+    // 記法が効かない？？
+    @include tableBody();
+  }
+}
+.table-image{
   @include tableBody();
-  }
-  img{
-    border-radius: 15px;
-  }
+  padding: 10px;
+  max-width: 120px;
 }
 
 .column-menu{

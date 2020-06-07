@@ -11,7 +11,7 @@
 </p>
 
 <p class="post-image">
-  <%= image_tag "#{@post.image}" %>
+  <%= image_tag @post.image, alt: 'No Image', class: 'post-image-area' %>
 </p>
 
 <div class="show-links">

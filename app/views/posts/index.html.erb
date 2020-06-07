@@ -18,7 +18,7 @@
       <tr>
         <td class="table-contents--title"><%= post.title.truncate(20) %></td>
         <td class="table-contents"><%= post.content.truncate(200) %></td>
-        <td class="table-contents"><%= image_tag "#{post.image}", size: '100x100' %></td>
+        <td class="table-image"><%= image_tag "#{post.image}", alt: 'No Image', size: '100x100' %></td>
         <td class="column-menu"><%= link_to '詳細確認', post %></td>
         <td class="column-menu"><%= link_to '編集', edit_post_path(post) %></td>
         <td class="column-menu"><%= link_to '削除', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
