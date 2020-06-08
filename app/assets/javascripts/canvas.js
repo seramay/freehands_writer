@@ -28,12 +28,12 @@ window.addEventListener('load', function(){
 // https://developer.mozilla.org/ja/docs/Web/API/Blob#使用例
 // https://developer.mozilla.org/ja/docs/Web/API/URL/createObjectURL#Syntax
   function saveCanvas(){
-    let imageType = "image/png";
+    var imageType = "image/png";
     var base64 = cvs.toDataURL(imageType); // canvasタグのURLをbase64形式で取得
     var blob = base64toBlob(base64); // 下記関数にてbase64をblobデータに変換
     var url = (window.URL || window.webkitURL);
     var dataUrl = url.createObjectURL(blob); // ダウンロード用のURL作成
-    let fileName = "sample.png";
+    var fileName = "sample.png";
     var a = document.getElementById('canvas-submit');
     a.href = dataUrl; // ダウンロード用のURLセット
     a.download = fileName; // ファイル名セット
