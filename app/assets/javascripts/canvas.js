@@ -12,14 +12,15 @@ window.addEventListener('load', function(){
   // 下記の2つで連続描画をした点の部分を補完させている。
   conText.lineJoin="round";
   conText.lineCap="round";
-  // 画像オブジェクトを作成、srcに Rails gem 'gon'で取得した Base64データを代入
-  var img = new Image();
-  img.src = gon.post_image;
+  // 画像オブジェクトを作成、srcに Rails gem 'gon'で取得した Base64データを代入。データがない場合は無視
+  if (gon.post_image !== null) {
+    var img = new Image();
+    img.src = gon.post_image;
   // 上記画像オブジェクトをcanvasに設定
-  img.onload = function(){
-    conText.drawImage(img, 0, 0, 800, 600);
+    img.onload = function(){
+      conText.drawImage(img, 0, 0, 800, 600);
+    }
   }
-  
   // ドラッグ状態を判断する変数を宣言。イベント発火OSS参考記事   https://keita-blog.com/programming/jquery-drag ///
   var is_drag = false;
 

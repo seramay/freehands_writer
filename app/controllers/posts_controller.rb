@@ -15,6 +15,8 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    # consoleにて「Uncaught Refference Error gon is not defind」のため宣言
+    gon.post_image = @post.image
   end
 
   # GET /posts/1/edit
